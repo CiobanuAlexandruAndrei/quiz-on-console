@@ -171,4 +171,4 @@ class Learn:
         print(f"You did {percentual}% of answers correctly!")
 
 if __name__ == "__main__":
-    uno = Learn("morse_code.json", 5, True)
+    uno = Learn("Json/morse_code.json", 5, True)

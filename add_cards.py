@@ -20,5 +20,5 @@ MORSE_CODE_DICT = { 'A':'.-', 'B':'-...',
 
 for i in MORSE_CODE_DICT:
     card1 = Card(i, MORSE_CODE_DICT[i])
-    Learn.add_card_to_json_from_card(card1, "morse_code.json")
+    Learn.add_card_to_json_from_card(card1, "Json/morse_code.json")
 
