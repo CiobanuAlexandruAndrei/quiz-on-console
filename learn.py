@@ -33,8 +33,9 @@ class Learn:
     answered_correctly = 0
     total_answers = 0
 
-    def __init__(self, json_file, max_points, is_multiple_choice_enabled):
-        self.load_cards_from_json(json_file)
+    def __init__(self, json_file_list, max_points, is_multiple_choice_enabled):
+        for file in json_file_list:
+            self.load_cards_from_json(file)
         self.max_points = max_points
         self.multiple_choice_enabled = is_multiple_choice_enabled
 
@@ -44,6 +45,9 @@ class Learn:
             print(i)
         input("\n(Press ENTER to continue)")
         self.quiz()
+
+    def clear_terminal(self):
+        os.system("cls")
 
     def load_cards_from_json(self, file):
         f = open(file,)
@@ -95,15 +99,22 @@ class Learn:
             
 
     def multiple_choice_mode(self, card):
-        os.system("clear")
+        self.clear_terminal()
         answers_shown = self.get_random_answer(card.number)
         answers_shown.insert(random.randint(0,3), card.answer)
 
         print(f"Question: {card.name}")
         print("Select one of the answers by typing the number:")
         for i in range(len(answers_shown)):
-            print(f"{i+1} - {answers_shown[i]}")
-        user_answ = int(input("> "))
+            print(f"{i+1}) {answers_shown[i]}")
+
+        user_answ = input(">  ")
+
+        try:
+            user_answ = int(user_answ)
+        except ValueError:
+            user_answ = -1
+
         if answers_shown[user_answ-1] == card.answer:
             input("Correct answer!\n\n(Press ENTER to continue)")
             return True
@@ -113,7 +124,7 @@ class Learn:
             return False
 
     def write_answer_mode(self, card):
-        os.system("clear")
+        self.clear_terminal()
         print(card.name)
         user_answ = input("> ")
         if user_answ.lower() == card.answer.lower():
@@ -145,7 +156,7 @@ class Learn:
                 random_answers.append(random_one.answer)
         return random_answers
     
-    # TODO for the long future: use a real adaptive learning system.
+    # TODO: for the long future: use a real adaptive learning system.
     def quiz(self):
         while not self.finished:
             lowest_cards = self.get_lowest_cards()
@@ -165,10 +176,10 @@ class Learn:
                     self.answered_correctly += 1
                 
             self.finished = self.is_the_learning_done()
-        os.system("clear")
+        self.clear_terminal()
         print("Congratulations, you completed the learn section")
         percentual = int(self.answered_correctly/self.total_answers*1000)/10.0
         print(f"You did {percentual}% of answers correctly!")
 
 if __name__ == "__main__":
-    uno = Learn("Json/morse_code.json", 5, True)
+    uno = Learn(["Json/morse_code.json"], 5, True)
