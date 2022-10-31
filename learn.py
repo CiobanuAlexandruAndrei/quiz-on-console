@@ -34,12 +34,13 @@ class Learn:
     answered_correctly = 0
     total_answers = 0
 
+    # I know i could've used more simple files than JSON but i was courious about JSON.
     def __init__(self, json_file_list, max_points, is_multiple_choice_enabled):
         for file in json_file_list:
             self.load_cards_from_json(file)
         self.max_points = max_points
         self.multiple_choice_enabled = is_multiple_choice_enabled
-        
+
         print("WELCOME to the learn section!")
         print("The selected cards are:")
         for i in self.cards:
