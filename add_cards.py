@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Example of how to add cards to a json.
 
 from learn import Learn, Card
 import os

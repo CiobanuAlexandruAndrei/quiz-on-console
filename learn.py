@@ -22,7 +22,6 @@ class Card:
     def __repr__(self):
         return f"name: {self.name}, answer: {self.answer}"
 
-
 ### Ideas: using time and cards points, if you put too much time answering right it gives 
 ###        0.5 or 0.25 points instead of 1.
 class Learn:
