@@ -5,22 +5,9 @@
 import json
 import random
 import os
+from card import Card
+from convert_from_quizlet import get_quizlet_cards
 
-class Card:
-    number = None
-    name = None
-    answer = None
-
-    points = 0
-    learned = False
-
-    def __init__(self, name, answer):
-        self.number = random.randint(0, 100000000000000)
-        self.name = name
-        self.answer = answer
-
-    def __repr__(self):
-        return f"name: {self.name}, answer: {self.answer}"
 
 ### Ideas: using time and cards points, if you put too much time answering right it gives 
 ###        0.5 or 0.25 points instead of 1.
@@ -35,9 +22,13 @@ class Learn:
     total_answers = 0
 
     # I know i could've used more simple files than JSON but i was courious about JSON.
-    def __init__(self, json_file_list, max_points, is_multiple_choice_enabled):
-        for file in json_file_list:
-            self.load_cards_from_json(file)
+    def __init__(self, resource_list, max_points, is_multiple_choice_enabled):
+        for resource in resource_list:
+            if resource.startswith("http"):
+                new_cards = get_quizlet_cards(resource)
+                self.cards.extend(new_cards)
+            else:
+                self.load_cards_from_json(resource)
         self.max_points = max_points
         self.multiple_choice_enabled = is_multiple_choice_enabled
 
@@ -182,4 +173,4 @@ class Learn:
         print(f"You did {percentual}% of answers correctly!")
 
 if __name__ == "__main__":
-    one = Learn(["Json/morse_code.json"], 5, True)
+    one = Learn(["Json/morse_code.json", "https://quizlet.com/ch/481172668/vocaboli-flash-cards/"], 5, True)

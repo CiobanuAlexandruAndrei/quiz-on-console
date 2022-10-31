@@ -2,7 +2,7 @@
 
 from bs4 import BeautifulSoup
 import requests
-from learn import *
+from card import Card
 
 def get_quizlet_cards(quizlet_url):
 
@@ -40,7 +40,10 @@ def get_quizlet_cards(quizlet_url):
     
     return cards
 
-url = ""
-cards = get_quizlet_cards(url)
-for i in cards:
-    Learn.add_card_to_json_from_card(i, "Json/test.json")
+if __name__ == "__main__":
+    from learn import Learn
+    
+    url = ""
+    cards = get_quizlet_cards(url)
+    for i in cards:
+        Learn.add_card_to_json_from_card(i, "Json/test.json")
