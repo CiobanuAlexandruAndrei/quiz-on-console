@@ -24,6 +24,7 @@ class Card:
 
 ### Ideas: using time and cards points, if you put too much time answering right it gives 
 ###        0.5 or 0.25 points instead of 1.
+
 class Learn:
     cards = []
     finished = False
@@ -38,7 +39,7 @@ class Learn:
             self.load_cards_from_json(file)
         self.max_points = max_points
         self.multiple_choice_enabled = is_multiple_choice_enabled
-
+        
         print("WELCOME to the learn section!")
         print("The selected cards are:")
         for i in self.cards:
@@ -168,8 +169,6 @@ class Learn:
                     random_card.points += 1
                     self.answered_correctly += 1
             else:
-                #modes = [self.write_answer_mode, self.multiple_choice_mode]
-                #mode = random.choice(modes)
                 self.total_answers += 1
                 if self.multiple_choice_mode(random_card):
                     random_card.points += 1
@@ -182,4 +181,4 @@ class Learn:
         print(f"You did {percentual}% of answers correctly!")
 
 if __name__ == "__main__":
-    uno = Learn(["Json/morse_code.json"], 5, True)
+    one = Learn(["Json/morse_code.json"], 5, True)
