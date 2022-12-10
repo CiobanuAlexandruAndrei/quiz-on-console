@@ -1,16 +1,10 @@
 #!/usr/bin/env python3
 
-# Learn anything using repetition
-
 import json
 import random
 import os
 from card import Card
 from convert_from_quizlet import get_quizlet_cards
-
-
-### Ideas: using time and cards points, if you put too much time answering right it gives 
-###        0.5 or 0.25 points instead of 1.
 
 class Learn:
     cards = []
@@ -149,7 +143,6 @@ class Learn:
                 random_answers.append(random_one.answer)
         return random_answers
     
-    # TODO: for the long future: use a real adaptive learning system.
     def quiz(self):
         while not self.finished:
             lowest_cards = self.get_lowest_cards()
